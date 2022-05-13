@@ -1,30 +1,49 @@
+//  initialisation of express
+const express = require("express");
+const app = express();
+
+const cors = require("cors");
+
 const port = 9000;
-const http = require("http");
-const httpStatus = require("http-status-codes");
+// const http = require("http");
+// const httpStatus = require("http-status-codes");
 
 
-const routeResponseMap = {
-    "/movies": "All Movies Data in JSON format from Mongo DB",
-    "/genres": "All Genres Data in JSON format from Mongo DB",
-    "/artists": "All Artists Data in JSON format from Mongo DB"
-};
 
 
-const app = http.createServer((req, res) => {
-    console.log("Received an incoming request!");
-    if (routeResponseMap[req.url]) {
-        res.writeHead(httpStatus.StatusCodes.OK, { "Content-Type": "text/html" });
-        res.end(routeResponseMap[req.url]);
-    }
-    else {
-        res.writeHead(httpStatus.StatusCodes.NOT_FOUND);
-        res.end();
-    }
+// const routeResponseMap = {
+//     "/movies": "All Movies Data in JSON format from Mongo DB",
+//     "/genres": "All Genres Data in JSON format from Mongo DB",
+//     "/artists": "All Artists Data in JSON format from Mongo DB"
+// };
 
-})
-app.listen(port);
 
-console.log(`The server has started and is listening on port number: ${port}`);
+// const app = http.createServer((req, res) => {
+//     console.log("Received an incoming request!");
+//     if (routeResponseMap[req.url]) {
+//         res.writeHead(httpStatus.StatusCodes.OK, { "Content-Type": "text/html" });
+//         res.end(routeResponseMap[req.url]);
+//     }
+//     else {
+//         res.writeHead(httpStatus.StatusCodes.NOT_FOUND);
+//         res.end();
+//     }
+
+// })
+
+app.use(cors());
+
+app.get("/", (req, res) => {
+    res.status(200);
+    res.json({
+        message: "Welcome to Upgrad Movie booking application development."
+    });
+});
+
+
+app.listen(port, () => {
+    console.log(`The server has started and is listening on port number: ${port}`);
+});
 
 ////-----------------------------///
 

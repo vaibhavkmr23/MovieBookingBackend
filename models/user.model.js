@@ -4,13 +4,21 @@ module.exports = (mongoose) => {
         mongoose.Schema(
             {
                 userid: Number,
-                email: String,
-                first_name: String,
+                email:{
+                    type: String,
+                    unique: true,
+                    required: true,
+                    lowercase: true,
+                    validate: (value) => {
+                        return validator.isEmail(value);
+                    },
+                 },
+                first_name: { type: String, required: true },
                 last_name: String,
                 username: String,
-                contact: String,
-                password: String,
-                role: String,
+                contact: { type: String, required: true },
+                password: { type: String, required: true },
+                role: { type: String, default: "user", required: true },
                 isLoggedIn: Boolean,
                 uuid: String,
                 accesstoken: String,
@@ -32,11 +40,11 @@ module.exports = (mongoose) => {
                                 type: [
                                     {
                                         type: Number
-                                    }
-                                ]
-                            }
-                        }
-                    ]
+                                    },
+                                ],
+                            },
+                        },
+                    ],
                 },
             }
         )
