@@ -4,11 +4,13 @@ const app = express();
 
 const cors = require("cors");
 
+const bodyParser = require("body-parser");
 const port = 9000;
 // const http = require("http");
 // const httpStatus = require("http-status-codes");
 
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // const routeResponseMap = {
@@ -39,6 +41,11 @@ app.get("/", (req, res) => {
         message: "Welcome to Upgrad Movie booking application development."
     });
 });
+
+
+require("./routes/artist.routes")(app);
+require("./routes/genre.routes")(app);
+require("./routes/movie.routes")(app);
 
 
 app.listen(port, () => {
