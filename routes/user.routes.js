@@ -8,5 +8,9 @@ module.exports = app =>{
 
     app.post("/logout", users.logout);
 
+    router.get("/getCouponCode", users.getCouponCode);
+
+    router.put("/bookshow", users.bookShow);
+
     app.use("/", router);
 }
