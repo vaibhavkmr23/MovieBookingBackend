@@ -12,5 +12,5 @@ module.exports = app =>{
 
     app.get("/movies?status=RELEASED&title={title}&genres={genres}&artists={artists}&start_date={startdate}&end_date={enddate}", movies.findAllMovies);
 
-    app.use("/", router);
+    app.use("/api", router);
 }

@@ -6,15 +6,15 @@ exports.findAllMovies = (req, res) => {
     const { status, title, genres, artists, start_date, end_date } = req.query; // retrieves query paramaters
     if (status === undefined) {
         Movies.find({})
-            .then(data => res.json({ data: data }))
+            .then(data => res.json( data ))
             .catch(err => res.status(500).send({ message: "Some Error Occured while fetching movies", }));
     } else if (status === 'PUBLISHED') {
         Movies.find({ published: true })
-            .then(data => res.send(data))
+            .then(data => res.send({ movies: data }))
             .catch(err => req.status(500).send({ message: "Some Error Occured while fetching movies", }));
     } else if (status === 'RELEASED') {
         Movies.find({ released: true })
-            .then(data => res.send(data))
+            .then(data => res.send({ movies: data }))
             .catch(err => req.status(500).send({ message: "Some Error Occured while fetching movies", }));
     } else {
         res.status(400).send({ message: "invalid query string" });
@@ -29,7 +29,7 @@ exports.findOne = (req, res) => {
             if (data === null) {
                 res.send({ message: "Movie ID invalid" });
             } else {
-                res.json({ data: data });
+                res.json( data );
             }
         }).catch((err) => {
             res.status(500).send({
@@ -45,7 +45,7 @@ exports.findShows = (req, res) => {
         if (data === null) {
             res.send({ message: "Movie ID invalid" });
         } else {
-            res.json({ data: data });
+            res.json( data );
         }
     }).catch((err) => {
         res.status(500).send({
