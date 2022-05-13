@@ -5,10 +5,14 @@ const app = express();
 const cors = require("cors");
 
 const bodyParser = require("body-parser");
-const port = 9000;
+const port = 3000;
+
+const corsOptions = {
+    origin: "http://localhost:3000",
+};
 // const http = require("http");
 // const httpStatus = require("http-status-codes");
-
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -46,6 +50,7 @@ app.get("/", (req, res) => {
 require("./routes/artist.routes")(app);
 require("./routes/genre.routes")(app);
 require("./routes/movie.routes")(app);
+require("./routes/user.routes")(app);
 
 
 app.listen(port, () => {
