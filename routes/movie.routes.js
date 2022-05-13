@@ -12,5 +12,7 @@ module.exports = app =>{
 
     app.get("/movies?status=RELEASED&title={title}&genres={genres}&artists={artists}&start_date={startdate}&end_date={enddate}", movies.findAllMovies);
 
+    app.get("/movies:id/shows", movies.findShows);
+    
     app.use("/api", router);
 }
